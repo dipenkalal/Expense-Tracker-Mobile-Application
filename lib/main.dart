@@ -1,5 +1,6 @@
 import 'package:exptracker/transaction.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -18,25 +19,25 @@ class HomePage extends StatelessWidget {
     Transaction(
       id: '1',
       title: 'Title 1',
-      amount: 100,
+      amount: 1000,
       date: DateTime.now(),
     ),
     Transaction(
       id: '2',
       title: 'Title 2',
-      amount: 199,
+      amount: 1999,
       date: DateTime.now(),
     ),
     Transaction(
       id: '3',
       title: 'Title 3',
-      amount: 299,
+      amount: 2999,
       date: DateTime.now(),
     ),
     Transaction(
       id: '4',
       title: 'Title 4',
-      amount: 399,
+      amount: 3999,
       date: DateTime.now(),
     )
   ];
@@ -45,7 +46,7 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Debugging version 0.1.3'),
+          title: Text('Debugging version 0.1.5'),
         ),
         body: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -72,18 +73,18 @@ class HomePage extends StatelessWidget {
                     Container(
                       margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.black, width: 2)),
+                          border: Border.all(color: Colors.redAccent, width: 2)),
                       padding: EdgeInsets.all(10),
                       child: Text(
-                        trnx.amount.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.red),
+                        'Rs ' + trnx.amount.toString(),
+                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.redAccent),
                       ),
                     ),
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                       Text(trnx.title,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black87),),
-                      Text(trnx.date.toString(),style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black38),),
+                      Text(DateFormat.yMMMd('en_US').format(trnx.date),style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),),
 
                     ]),
                   ],
