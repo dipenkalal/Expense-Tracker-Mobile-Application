@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import './new_transaction.dart';
 import './transaction_list.dart';
+import '../models/transaction.dart';
 
 class usertrnx extends StatefulWidget {
   @override
@@ -8,6 +9,7 @@ class usertrnx extends StatefulWidget {
 }
 
 class _userTransactionState extends State<usertrnx> {
+
   final List<Transaction> _userTransactions = [
     Transaction(
       id: '1',
@@ -34,12 +36,25 @@ class _userTransactionState extends State<usertrnx> {
       date: DateTime.now(),
     )
   ];
+
+  void _addNewTrnx(String title, double amount){
+    final newTrnxs = Transaction(
+        id: DateTime.now().toString(),
+        title: title,
+        amount: amount,
+        date: DateTime.now());
+
+    setState(() {
+      _userTransactions.add(newTrnxs);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[
-        newTrnx(),
-        TrnxList()
+        newTrnx(_addNewTrnx),
+        TrnxList(_userTransactions),
       ],
     );
   }

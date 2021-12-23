@@ -1,5 +1,4 @@
-import 'package:exptracker/widgets/new_transaction.dart';
-import 'package:exptracker/widgets/transaction_list.dart';
+import 'package:exptracker/widgets/user_transactions.dart';
 import 'package:flutter/material.dart';
 import 'dart:ui' as ui;
 
@@ -28,7 +27,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Debugging version 0.1.7'),
+          title: Text('Debugging version 0.1.8'),
         ),
         body: Column(
           //body part
@@ -48,8 +47,7 @@ class HomePage extends StatelessWidget {
                 elevation: 8,
               ),
             ),
-            newTrnx(),
-            TrnxList()
+            usertrnx()
           ],
         ));
   }

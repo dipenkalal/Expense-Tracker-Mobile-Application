@@ -3,45 +3,17 @@ import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
 
-class TrnxList extends StatefulWidget {
-  @override
-  _TransactionListState createState() => _TransactionListState();
-}
+class TrnxList extends StatelessWidget {
 
-class _TransactionListState extends State<TrnxList> {
-  final List<Transaction> _userTransactions = [
-    Transaction(
-      id: '1',
-      title: 'Title 1',
-      amount: 1000,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Title 2',
-      amount: 1999,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '3',
-      title: 'Title 3',
-      amount: 2999,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '4',
-      title: 'Title 4',
-      amount: 3999,
-      date: DateTime.now(),
-    )
-  ];
+  final List<Transaction> transactions;
+  TrnxList(this.transactions);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: _userTransactions.map((trnx) {
+      children: transactions.map((trnx) {
         return Row(
           //Container 2(bottom Container)
           children: <Widget>[

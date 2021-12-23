@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 
 class newTrnx extends StatelessWidget {
+  final Function addtrnx;
   final titleController = TextEditingController();
   final amountController = TextEditingController();
+
+  //newTrnx(void Function(String title, int amount) addNewTrnx);
+
+  newTrnx(this.addtrnx);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -26,8 +32,7 @@ class newTrnx extends StatelessWidget {
             ElevatedButton(
               onPressed: (
                   ) {
-                print(titleController.text);
-                print(amountController.text);
+                addtrnx(titleController.text,double.parse(amountController.text));
               },
               child: Text('Add Your Transaction.'),
               style: ButtonStyle(
