@@ -1,6 +1,7 @@
 import 'package:exptracker/transaction.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'dart:ui' as ui;
 
 void main() => runApp(MyApp());
 
@@ -45,7 +46,10 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ui.Size logicalSize = MediaQuery.of(context).size;
+    final double _height = logicalSize.height;
     return Scaffold(
+        resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Debugging version 0.1.7'),
         ),
@@ -90,7 +94,7 @@ class HomePage extends StatelessWidget {
                 return Row(
                   //Container 2(bottom Container)
                   children: <Widget>[
-                    Container(
+                     Container(
                       //transaction amount with border box
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
