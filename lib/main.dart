@@ -43,6 +43,10 @@ class HomePage extends StatelessWidget {
       date: DateTime.now(),
     )
   ];
+  // String titleInput="Enter Transaction";
+  // String amountInput="Enter the amount";
+  final titleController = TextEditingController();
+  final amountController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -73,15 +77,30 @@ class HomePage extends StatelessWidget {
             ),
             Card(
               child: Container(
-                padding:
-                EdgeInsets.all(10),
+                padding: EdgeInsets.all(10),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.end,
                   children: <Widget>[
-                    TextField(decoration: InputDecoration(labelText: 'Title'),),
-                    TextField(decoration: InputDecoration(labelText: 'Amount'),),
-                    ElevatedButton(onPressed: (){}, child: Text('Add Your Transaction.'), style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent), ), ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Title'),
+                      controller: titleController,
+                    ),
+                    TextField(
+                      decoration: InputDecoration(labelText: 'Amount'),
+                      controller: amountController,
+                    ),
+                    ElevatedButton(
+                      onPressed: (
+                          ) {
+                        print(titleController.text);
+                        print(amountController.text);
+                      },
+                      child: Text('Add Your Transaction.'),
+                      style: ButtonStyle(
+                        backgroundColor:
+                            MaterialStateProperty.all<Color>(Colors.redAccent),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -94,7 +113,7 @@ class HomePage extends StatelessWidget {
                 return Row(
                   //Container 2(bottom Container)
                   children: <Widget>[
-                     Container(
+                    Container(
                       //transaction amount with border box
                       margin:
                           EdgeInsets.symmetric(vertical: 10, horizontal: 20),
