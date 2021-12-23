@@ -29,26 +29,29 @@ class HomePage extends StatelessWidget {
         appBar: AppBar(
           title: Text('Debugging version 0.1.8'),
         ),
-        body: Column(
-          //body part
-          //mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            //Container 1(upper Container)
-            Container(
-              // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-              // decoration: BoxDecoration(
-              //     border: Border.all(color: Colors.black, width: 2)),
-              // width: double.infinity,
-              // padding: EdgeInsets.all(20),
-              child: Card(
-                color: Colors.blueGrey,
-                child: Text('Chart Area!!'),
-                elevation: 8,
-              ),
-            ),
-            usertrnx()
-          ],
+        body: SingleChildScrollView(
+            child: Column(
+        //body part
+        //mainAxisAlignment: MainAxisAlignment.spaceAround,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget>[
+        //Container 1(upper Container)
+        Container(
+        // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+        // decoration: BoxDecoration(
+        //     border: Border.all(color: Colors.black, width: 2)),
+        // width: double.infinity,
+        // padding: EdgeInsets.all(20),
+        child: Card(
+            color: Colors.blueGrey,
+            child: Text('Chart Area!!'),
+      elevation: 8,
+    ),
+    ),
+    usertrnx()
+    ],
+    )
+
         ));
   }
 }
