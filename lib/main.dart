@@ -16,6 +16,7 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatelessWidget {
   final List<Transaction> transaction = [
+    //map concept
     Transaction(
       id: '1',
       title: 'Title 1',
@@ -46,12 +47,14 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Debugging version 0.1.5'),
+          title: Text('Debugging version 0.1.7'),
         ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          //body part
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
+            //Container 1(upper Container)
             Container(
               // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
               // decoration: BoxDecoration(
@@ -64,29 +67,65 @@ class HomePage extends StatelessWidget {
                 elevation: 8,
               ),
             ),
+            Card(
+              child: Container(
+                padding:
+                EdgeInsets.all(10),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    TextField(decoration: InputDecoration(labelText: 'Title'),),
+                    TextField(decoration: InputDecoration(labelText: 'Amount'),),
+                    ElevatedButton(onPressed: (){}, child: Text('Add Your Transaction.'), style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(Colors.redAccent), ), ),
+                  ],
+                ),
+              ),
+            ),
+
             Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: transaction.map((trnx) {
                 return Row(
+                  //Container 2(bottom Container)
                   children: <Widget>[
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                      //transaction amount with border box
+                      margin:
+                          EdgeInsets.symmetric(vertical: 10, horizontal: 20),
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.redAccent, width: 2)),
+                          border:
+                              Border.all(color: Colors.redAccent, width: 2)),
                       padding: EdgeInsets.all(10),
                       child: Text(
                         'Rs ' + trnx.amount.toString(),
-                        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.redAccent),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.redAccent),
                       ),
                     ),
                     Column(
+                        // transaction title and date with yMMMd format
+                        // (column can't be decorated compared to container)
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                      Text(trnx.title,style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black87),),
-                      Text(DateFormat.yMMMd('en_US').format(trnx.date),style: TextStyle(fontWeight: FontWeight.bold, fontSize: 14, color: Colors.black38),),
-
-                    ]),
+                          Text(
+                            trnx.title,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 20,
+                                color: Colors.black87),
+                          ),
+                          Text(
+                            DateFormat.yMMMd('en_US').format(trnx.date),
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14,
+                                color: Colors.black38),
+                          ),
+                        ]),
                   ],
                 );
               }).toList(),
