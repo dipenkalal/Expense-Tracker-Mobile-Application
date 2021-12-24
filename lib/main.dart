@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
-          title: Text('Debugging version 0.1.8'),
+          title: Text('Debugging version 0.2.3'),
         ),
         body: SingleChildScrollView(
             child: Column(

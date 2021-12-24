@@ -1,22 +1,27 @@
 import 'package:flutter/material.dart';
 
-class newTrnx extends StatelessWidget {
+class newTrnx extends StatefulWidget {
   final Function addtrnx;
-  final titleController = TextEditingController();
-  final amountController = TextEditingController();
-
-  //newTrnx(void Function(String title, int amount) addNewTrnx);
 
   newTrnx(this.addtrnx);
 
-  void SubmitData(){
-    final enteredTitle = titleController.text;
-    final enteredAmount = double.parse( amountController.text );
+  @override
+  State<newTrnx> createState() => _newTrnxState();
+}
+
+class _newTrnxState extends State<newTrnx> {
+  final TitleController = TextEditingController();
+
+  final AmountController = TextEditingController();
+
+  void submitData(){
+    final enteredTitle = TitleController.text;
+    final enteredAmount = double.parse( AmountController.text );
 
     if(enteredTitle.isEmpty||enteredAmount<=0){
       return;
     }
-    addtrnx(
+    widget.addtrnx(
         enteredTitle,
         enteredAmount,
     );
@@ -32,20 +37,21 @@ class newTrnx extends StatelessWidget {
           children: <Widget>[
             SizedBox(height: 10),
             TextField(
+              //autofocus: true,
               decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Title'),
-              controller: titleController,
-              onSubmitted: (_)=> SubmitData,
+              controller: TitleController,
+              onSubmitted: (_)=> submitData,
             ),
             SizedBox(height: 10),
             TextField(
               decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Amount'),
-              controller: amountController,
+              controller: AmountController,
               keyboardType: TextInputType.number,
-              onSubmitted: (_)=> SubmitData,
+              onSubmitted: (_)=> submitData,
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: SubmitData,
+              onPressed: submitData,
               // (
               //     ) {
               //
