@@ -28,6 +28,9 @@ class HomePage extends StatelessWidget {
         resizeToAvoidBottomInset: false,
         appBar: AppBar(
           title: Text('Debugging version 0.2.3'),
+          actions: <Widget>[
+            IconButton(onPressed: (){}, icon: Icon(Icons.add_circle_outline)),
+          ],
         ),
         body: SingleChildScrollView(
             child: Column(
@@ -50,8 +53,17 @@ class HomePage extends StatelessWidget {
     ),
     usertrnx()
     ],
-    )
+            )
+        ),
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+        floatingActionButton: FloatingActionButton.extended(
+          onPressed: (){
 
-        ));
+          },
+          icon: Icon(Icons.add),
+          label: const Text('Add Transaction'),
+          backgroundColor: Colors.redAccent,
+    ),
+    );
   }
 }
