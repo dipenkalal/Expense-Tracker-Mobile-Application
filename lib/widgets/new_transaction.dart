@@ -33,7 +33,7 @@ class _newTrnxState extends State<newTrnx> {
       child: Container(
         padding: EdgeInsets.all(10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 10),
             TextField(
@@ -49,18 +49,19 @@ class _newTrnxState extends State<newTrnx> {
               keyboardType: TextInputType.number,
               onSubmitted: (_)=> submitData,
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: submitData,
-              // (
-              //     ) {
-              //
-              // },
-              child: Text('Add Your Transaction.'),
-              style: ButtonStyle(
-                backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.redAccent),
-              ),
+              child: Text('Add Your Transaction'),
+              style: ElevatedButton.styleFrom(
+                  primary: Colors.redAccent,
+                  padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                  textStyle:
+                  const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+              // style: ButtonStyle(
+              //   backgroundColor:
+              //   MaterialStateProperty.all<Color>(Colors.redAccent),
+              // ),
             ),
             SizedBox(height: 10),
           ],

@@ -11,7 +11,7 @@ class TrnxList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 400,
+      height: 665,
       child: ListView.builder(
         itemBuilder: (context, index){
           return Card(
