@@ -9,6 +9,19 @@ class newTrnx extends StatelessWidget {
 
   newTrnx(this.addtrnx);
 
+  void SubmitData(){
+    final enteredTitle = titleController.text;
+    final enteredAmount = double.parse( amountController.text );
+
+    if(enteredTitle.isEmpty||enteredAmount<=0){
+      return;
+    }
+    addtrnx(
+        enteredTitle,
+        enteredAmount,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -21,19 +34,22 @@ class newTrnx extends StatelessWidget {
             TextField(
               decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Title'),
               controller: titleController,
+              onSubmitted: (_)=> SubmitData,
             ),
             SizedBox(height: 10),
             TextField(
-
               decoration: InputDecoration(border: OutlineInputBorder(),labelText: 'Amount'),
               controller: amountController,
+              keyboardType: TextInputType.number,
+              onSubmitted: (_)=> SubmitData,
             ),
             SizedBox(height: 10),
             ElevatedButton(
-              onPressed: (
-                  ) {
-                addtrnx(titleController.text,double.parse(amountController.text));
-              },
+              onPressed: SubmitData,
+              // (
+              //     ) {
+              //
+              // },
               child: Text('Add Your Transaction.'),
               style: ButtonStyle(
                 backgroundColor:

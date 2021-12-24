@@ -34,7 +34,20 @@ class _userTransactionState extends State<usertrnx> {
       title: 'Title 4',
       amount: 3999,
       date: DateTime.now(),
-    )
+    ),
+    Transaction(
+      id: '5',
+      title: 'Title 5 ',
+      amount: 3999,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '6',
+      title: 'Title 6',
+      amount: 3999,
+      date: DateTime.now(),
+    ),
+
   ];
 
   void _addNewTrnx(String title, double amount){
