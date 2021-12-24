@@ -58,7 +58,7 @@ class TrnxList extends StatelessWidget {
                     style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 20,
-                        color: Colors.redAccent),
+                        color: Theme.of(context).primaryColorDark),
                   ),
                 ),
               ],

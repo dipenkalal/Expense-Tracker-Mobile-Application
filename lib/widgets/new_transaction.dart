@@ -25,6 +25,7 @@ class _newTrnxState extends State<newTrnx> {
         enteredTitle,
         enteredAmount,
     );
+    Navigator.of(context).pop();
   }
 
   @override

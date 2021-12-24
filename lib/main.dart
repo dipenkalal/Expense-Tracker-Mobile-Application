@@ -11,6 +11,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        primarySwatch: Colors.red,
+        fontFamily: 'Montserrat',
+      ),
       title: 'Second Application',
       home: HomePage(),
     );
@@ -28,7 +32,7 @@ class _HomePageState extends State<HomePage> {
     Transaction(
       id: '1',
       title: 'Title 1',
-      amount: 1000,
+      amount: 100,
       date: DateTime.now(),
     ),
     Transaction(
@@ -46,18 +50,6 @@ class _HomePageState extends State<HomePage> {
     Transaction(
       id: '4',
       title: 'Title 4',
-      amount: 3999,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '5',
-      title: 'Title 5 ',
-      amount: 3999,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '6',
-      title: 'Title 6',
       amount: 3999,
       date: DateTime.now(),
     ),
@@ -91,7 +83,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Debugging version 0.2.3'),
+        title: Text('Debugging version 0.2.8', style: TextStyle(fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),),
         actions: <Widget>[
           IconButton(
               onPressed: () => _startAddNewTrnx(context),
