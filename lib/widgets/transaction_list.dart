@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/material.dart';
 import '../models/transaction.dart';
@@ -11,17 +12,35 @@ class TrnxList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 665,
-      child: ListView.builder(
+      height: 500,
+      child: transactions.isEmpty ? Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Container(height: 20),
+          Container(
+
+              height: 200,
+              child: Image.asset('assets/images/waiting-icon.png', fit: BoxFit.contain,)),
+
+          SizedBox(height: 20),
+          Text('No Transactions to show 😃',
+            style: TextStyle(
+                fontSize: 24,
+              fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),),
+
+
+        ],
+      ): ListView.builder(
         itemBuilder: (context, index){
           return Card(
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               //Container 2(bottom Container)
               children: <Widget>[
-            Expanded(
-            child: Container(
+            Container(
                 padding: EdgeInsets.all(10.0),
+            margin: EdgeInsets.only(left: 10),
             child: (Column(
               crossAxisAlignment: CrossAxisAlignment.start,
                 children:[
@@ -41,13 +60,12 @@ class TrnxList extends StatelessWidget {
                             color: Colors.black38),
                       ),
                     ])
-            ),),),
+            ),),
                 Container(
                   width: 120.0,
                   alignment: Alignment.bottomRight ,
                   //transaction amount with border box
-                  margin:
-                  EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                  margin: EdgeInsets.only(right: 10),
                   decoration: BoxDecoration(
                       //border:
                       //Border.all(color: Colors.redAccent, width: 2)

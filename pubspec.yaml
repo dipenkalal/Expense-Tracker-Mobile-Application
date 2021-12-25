@@ -35,6 +35,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   intl: ^0.17.0
+  charts_flutter: ^0.12.0
 
 dev_dependencies:
   flutter_test:
@@ -59,9 +60,9 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+     - assets/images/waiting-icon.png
+#     - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
@@ -77,13 +78,13 @@ flutter:
   fonts:
      - family: Montserrat
        fonts:
-         - asset: fonts/Montserrat-SemiBold.ttf
-         - asset: fonts/Montserrat-Black.ttf
+         - asset: assets/fonts/Montserrat-SemiBold.ttf
+         - asset: assets/fonts/Montserrat-Black.ttf
            weight: 500
      - family: ArimaMadurai
        fonts:
-         - asset: fonts/ArimaMadurai-Medium.ttf
-         - asset: fonts/ArimaMadurai-Black.ttf
+         - asset: assets/fonts/ArimaMadurai-Medium.ttf
+         - asset: assets/fonts/ArimaMadurai-Black.ttf
            weight: 500
   #   - family: Trajan Pro
   #     fonts:

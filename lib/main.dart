@@ -1,9 +1,11 @@
 import 'package:exptracker/widgets/new_transaction.dart';
 import 'package:exptracker/widgets/transaction_list.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './models/transaction.dart';
 import 'dart:ui' as ui;
+import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,31 +31,40 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // String titleInput="Enter Transaction";
   final List<Transaction> _userTransactions = [
-    Transaction(
-      id: '1',
-      title: 'Title 1',
-      amount: 100,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '2',
-      title: 'Title 2',
-      amount: 1999,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '3',
-      title: 'Title 3',
-      amount: 2999,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: '4',
-      title: 'Title 4',
-      amount: 3999,
-      date: DateTime.now(),
-    ),
+    // Transaction(
+    //   id: '1',
+    //   title: 'Title 1',
+    //   amount: 100,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '2',
+    //   title: 'Title 2',
+    //   amount: 1999,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '3',
+    //   title: 'Title 3',
+    //   amount: 2999,
+    //   date: DateTime.now(),
+    // ),
+    // Transaction(
+    //   id: '4',
+    //   title: 'Title 4',
+    //   amount: 3999,
+    //   date: DateTime.now(),
+    // ),
   ];
+
+  List<Transaction> get _recentTrnx{
+
+    return _userTransactions.where((tx){
+
+      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7),),);
+    }).toList();
+
+  }
 
   void _addNewTrnx(String title, double amount) {
     final newTrnxs = Transaction(
@@ -83,7 +94,11 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        title: Text('Debugging version 0.2.8', style: TextStyle(fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),),
+        title: Text(
+          'Debugging version 0.3.1',
+          style: TextStyle(
+              fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
+        ),
         actions: <Widget>[
           IconButton(
               onPressed: () => _startAddNewTrnx(context),
@@ -96,19 +111,9 @@ class _HomePageState extends State<HomePage> {
         //mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          //Container 1(upper Container)
-          Container(
-            // margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-            // decoration: BoxDecoration(
-            //     border: Border.all(color: Colors.black, width: 2)),
-            // width: double.infinity,
-            // padding: EdgeInsets.all(20),
-            child: Card(
-              color: Colors.blueGrey,
-              child: Text('Chart Area!!'),
-              elevation: 8,
-            ),
-          ),
+          chart(_recentTrnx),
+
+
           TrnxList(_userTransactions)
         ],
       )),
