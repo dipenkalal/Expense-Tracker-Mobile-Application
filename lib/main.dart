@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.red,
-        accentColor: Colors.amber,
+        primarySwatch: Colors.deepPurple,
+
         fontFamily: 'Montserrat',
       ),
       title: 'Second Application',
@@ -34,26 +34,26 @@ class _HomePageState extends State<HomePage> {
   final List<Transaction> _userTransactions = [
     Transaction(
       id: '1',
-      title: 'Title 1',
-      amount: 100,
+      title: 'Vegetables ',
+      amount: 150,
       date: DateTime.now(),
     ),
     Transaction(
       id: '2',
-      title: 'Title 2',
-      amount: 199,
+      title: 'Transportation ',
+      amount: 245,
       date: DateTime.now(),
     ),
     Transaction(
       id: '3',
-      title: 'Title 3',
-      amount: 299,
+      title: 'Utility Bills ',
+      amount: 5750,
       date: DateTime.now(),
     ),
     Transaction(
       id: '4',
-      title: 'Title 4',
-      amount: 399,
+      title: 'Monthly Memberships ',
+      amount: 159,
       date: DateTime.now(),
     ),
   ];
@@ -67,12 +67,12 @@ class _HomePageState extends State<HomePage> {
 
   }
 
-  void _addNewTrnx(String title, double amount) {
+  void _addNewTrnx(String title, double amount,DateTime ChosenDate) {
     final newTrnxs = Transaction(
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now());
+        date: ChosenDate);
 
     setState(() {
       _userTransactions.add(newTrnxs);
@@ -88,6 +88,14 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _deleteTrnx(String id){
+    setState(() {
+      _userTransactions.removeWhere((tx){
+        return tx.id == id;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     // final ui.Size logicalSize = MediaQuery.of(context).size;
@@ -96,15 +104,16 @@ class _HomePageState extends State<HomePage> {
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          'Debugging version 0.3.3',
+          'Personal Expense Tracker',
           style: TextStyle(
               fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
         ),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => _startAddNewTrnx(context),
-              icon: Icon(Icons.add_circle_outline)),
-        ],
+
+        // actions: <Widget>[
+        //   IconButton(
+        //       onPressed: () => _startAddNewTrnx(context),
+        //       icon: Icon(Icons.add_circle_outline)),
+        // ],
       ),
       body: SingleChildScrollView(
           child: Column(
@@ -113,15 +122,16 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           chart(_recentTrnx),
-          TrnxList(_userTransactions)
+          Container(child: TrnxList(_userTransactions,_deleteTrnx))
         ],
       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () => _startAddNewTrnx(context),
         icon: Icon(Icons.add),
+        foregroundColor: Colors.white,
         label: const Text('Add Transaction'),
-        backgroundColor: Colors.redAccent,
+        backgroundColor: Colors.deepPurple,
       ),
     );
   }

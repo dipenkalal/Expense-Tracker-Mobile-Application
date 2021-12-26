@@ -6,7 +6,11 @@ import 'package:intl/intl.dart';
 
 class TrnxList extends StatelessWidget {
   final List<Transaction> transactions;
-  TrnxList(this.transactions);
+  final Function deleteTx;
+
+
+  TrnxList(this.transactions, this.deleteTx);
+
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,7 @@ class TrnxList extends StatelessWidget {
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
                     leading: CircleAvatar(
-                      radius: 30,
+                      radius: 35,
                       child: Padding(
                         padding: EdgeInsets.all(10.0),
                         child: FittedBox(
@@ -55,6 +59,7 @@ class TrnxList extends StatelessWidget {
                     subtitle: Text(
                       DateFormat.yMMMd().format(transactions[index].date),
                     ),
+                    trailing: IconButton(icon: Icon(Icons.delete_rounded ), color: Colors.red, onPressed: () => deleteTx(transactions[index].id),),
                   ),
                 );
               },

@@ -14,8 +14,7 @@ class chart extends StatelessWidget {
       for (var i = 0; i < recentTrnx.length; i++) {
         if (recentTrnx[i].date.day == weekDay.day &&
             recentTrnx[i].date.month == weekDay.month &&
-            recentTrnx[i].date.year == weekDay.year);
-        {
+            recentTrnx[i].date.year == weekDay.year) {
           totalSum += recentTrnx[i].amount;
         }
       }
@@ -24,11 +23,11 @@ class chart extends StatelessWidget {
         'day': DateFormat.E().format(weekDay).substring(0, 1),
         'amount': totalSum,
       };
-    });
+    }).reversed.toList();
   }
 
   double get maxSpendings {
-    return groupedTrnxValues.fold(0.0, (sum, item) {
+    return groupedTrnxValues.fold(0, (sum, item) {
       return sum + item['amount'];
     });
   }
@@ -49,8 +48,8 @@ class chart extends StatelessWidget {
               child: chartBar(
                 data['day'],
                 data['amount'],
-                maxSpendings == 0.0
-                    ? 0.0
+                maxSpendings == 0
+                    ? 0
                     : (data['amount'] as double) / maxSpendings,
               ),
             );

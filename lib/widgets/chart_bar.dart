@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class chartBar extends StatelessWidget {
   final String label;
@@ -38,7 +39,8 @@ class chartBar extends StatelessWidget {
                 heightFactor: spendingPerTotal,
                 child: Container(
                   decoration: BoxDecoration(
-                    color: Theme.of(context).primaryColor,
+                    color: Colors.deepPurple,
+                    //Theme.of(context).primaryColor,
                     borderRadius: BorderRadius.circular(2),
                   ),
                 ),
