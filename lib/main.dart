@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.red,
+        accentColor: Colors.amber,
         fontFamily: 'Montserrat',
       ),
       title: 'Second Application',
@@ -25,36 +26,36 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
   // String titleInput="Enter Transaction";
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: '1',
-    //   title: 'Title 1',
-    //   amount: 100,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '2',
-    //   title: 'Title 2',
-    //   amount: 1999,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '3',
-    //   title: 'Title 3',
-    //   amount: 2999,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '4',
-    //   title: 'Title 4',
-    //   amount: 3999,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: '1',
+      title: 'Title 1',
+      amount: 100,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '2',
+      title: 'Title 2',
+      amount: 199,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '3',
+      title: 'Title 3',
+      amount: 299,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '4',
+      title: 'Title 4',
+      amount: 399,
+      date: DateTime.now(),
+    ),
   ];
 
   List<Transaction> get _recentTrnx{
@@ -89,13 +90,13 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final ui.Size logicalSize = MediaQuery.of(context).size;
-    final double _height = logicalSize.height;
+    // final ui.Size logicalSize = MediaQuery.of(context).size;
+    // final double _height = logicalSize.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         title: Text(
-          'Debugging version 0.3.1',
+          'Debugging version 0.3.3',
           style: TextStyle(
               fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
         ),
@@ -112,8 +113,6 @@ class _HomePageState extends State<HomePage> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           chart(_recentTrnx),
-
-
           TrnxList(_userTransactions)
         ],
       )),

@@ -6,7 +6,7 @@ class newTrnx extends StatefulWidget {
   newTrnx(this.addtrnx);
 
   @override
-  State<newTrnx> createState() => _newTrnxState();
+  _newTrnxState createState() => _newTrnxState();
 }
 
 class _newTrnxState extends State<newTrnx> {
@@ -32,7 +32,7 @@ class _newTrnxState extends State<newTrnx> {
   Widget build(BuildContext context) {
     return Card(
       child: Container(
-        height: 250 ,
+        // height: 250 ,
         padding: EdgeInsets.all(10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
