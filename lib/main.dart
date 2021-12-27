@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './models/transaction.dart';
-import 'dart:ui' as ui;
+
 import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
@@ -15,7 +15,6 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData(
         primarySwatch: Colors.deepPurple,
-
         fontFamily: 'Montserrat',
       ),
       title: 'Second Application',
@@ -98,8 +97,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    // final ui.Size logicalSize = MediaQuery.of(context).size;
-    // final double _height = logicalSize.height;
+    //final ui.Size logicalSize = MediaQuery.of(context).size;
+    //final double _height = logicalSize.height;
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/transaction.dart';
 import 'package:intl/intl.dart';
 
+
 class TrnxList extends StatelessWidget {
   final List<Transaction> transactions;
   final Function deleteTx;
@@ -14,6 +15,7 @@ class TrnxList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return Container(
       height: 500,
       child: transactions.isEmpty
@@ -21,6 +23,7 @@ class TrnxList extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+
                 SizedBox(height: 20),
                 Container(
                     height: 200,
@@ -39,11 +42,14 @@ class TrnxList extends StatelessWidget {
               ],
             )
           : ListView.builder(
+                  shrinkWrap: true,
               itemBuilder: (ctx, index) {
                 return Card(
+
                   elevation: 5,
                   margin: EdgeInsets.symmetric(vertical: 8, horizontal: 5),
                   child: ListTile(
+
                     leading: CircleAvatar(
                       radius: 35,
                       child: Padding(
