@@ -1,4 +1,4 @@
-import 'package:exptracker/widgets/chart_bar.dart';
+import 'dart:io';
 import 'package:exptracker/widgets/new_transaction.dart';
 import 'package:exptracker/widgets/transaction_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -121,6 +121,9 @@ class _HomePageState extends State<HomePage> {
         style: TextStyle(
             fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
       ),
+      actions: <Widget>[
+        //ElevatedButton.icon(onPressed: () =>  _startAddNewTrnx(context), icon: Icon(Icons.add_circle_outline), label: Text('ADD'))
+            ],
     );
     final txListWidget = Container(
         height: (mQuery.size.height -
@@ -128,43 +131,47 @@ class _HomePageState extends State<HomePage> {
             mQuery.padding.top) *
             0.7,
         child: TrnxList(_userTransactions, _deleteTrnx));
-    return Scaffold(
-      appBar: appBar,
-      body: SingleChildScrollView(
-          child: Column(
-        //body part
-        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          if (isLandscape) Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: <Widget>[
-            Text('Show Chart'),
-            Switch(value: _showChart, onChanged: (val){
-              setState(() {
-                _showChart=val;
-              });
-            } ),
+    final pageBody = SafeArea(child: SingleChildScrollView(
+        child: Column(
+          //body part
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (isLandscape) Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text('Show Chart'),
+                Switch.adaptive(value: _showChart, onChanged: (val){
+                  setState(() {
+                    _showChart=val;
+                  });
+                } ),
+              ],
+            ),
+            if (!isLandscape) Container(
+                height: (mQuery.size.height -
+                    appBar.preferredSize.height -
+                    mQuery.padding.top) *
+                    0.28,
+                child: chart(_recentTrnx)),
+            if (!isLandscape) txListWidget,
+            if (isLandscape) _showChart ? Container(
+                height: (mQuery.size.height -
+                    appBar.preferredSize.height -
+                    mQuery.padding.top) *
+                    0.75,
+                child: chart(_recentTrnx))
+                : txListWidget
           ],
-          ),
-           if (!isLandscape) Container(
-               height: (mQuery.size.height -
-                   appBar.preferredSize.height -
-                   mQuery.padding.top) *
-                   0.28,
-               child: chart(_recentTrnx)),
-           if (!isLandscape) txListWidget,
-          if (isLandscape) _showChart ? Container(
-              height: (mQuery.size.height -
-                      appBar.preferredSize.height -
-                  mQuery.padding.top) *
-                  0.75,
-              child: chart(_recentTrnx))
-          : txListWidget
-        ],
-      )),
+        )),
+    );
+    
+    
+    return Platform.isIOS? CupertinoPageScaffold(child: pageBody ,) : Scaffold(
+      appBar: appBar,
+      body: pageBody,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: Platform.isIOS ? Container() : FloatingActionButton.extended(
         onPressed: () => _startAddNewTrnx(context),
         icon: Icon(Icons.add),
         foregroundColor: Colors.white,
