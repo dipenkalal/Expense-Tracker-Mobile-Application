@@ -1,3 +1,4 @@
+import 'package:exptracker/widgets/chart_bar.dart';
 import 'package:exptracker/widgets/new_transaction.dart';
 import 'package:exptracker/widgets/transaction_list.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,7 +30,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  // String titleInput="Enter Transaction";
+
   final List<Transaction> _userTransactions = [
     Transaction(
       id: '1',
@@ -55,18 +56,33 @@ class _HomePageState extends State<HomePage> {
       amount: 159,
       date: DateTime.now(),
     ),
+    Transaction(
+      id: '5',
+      title: 'Vegetables ',
+      amount: 150,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '6',
+      title: 'Transportation ',
+      amount: 245,
+      date: DateTime.now(),
+    ),
   ];
 
-  List<Transaction> get _recentTrnx{
+  bool _showChart = false;
 
-    return _userTransactions.where((tx){
-
-      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7),),);
+  List<Transaction> get _recentTrnx {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
     }).toList();
-
   }
 
-  void _addNewTrnx(String title, double amount,DateTime ChosenDate) {
+  void _addNewTrnx(String title, double amount, DateTime ChosenDate) {
     final newTrnxs = Transaction(
         id: DateTime.now().toString(),
         title: title,
@@ -87,9 +103,9 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  void _deleteTrnx(String id){
+  void _deleteTrnx(String id) {
     setState(() {
-      _userTransactions.removeWhere((tx){
+      _userTransactions.removeWhere((tx) {
         return tx.id == id;
       });
     });
@@ -97,31 +113,53 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    //final ui.Size logicalSize = MediaQuery.of(context).size;
-    //final double _height = logicalSize.height;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text(
-          'Personal Expense Tracker',
-          style: TextStyle(
-              fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
-        ),
-
-        // actions: <Widget>[
-        //   IconButton(
-        //       onPressed: () => _startAddNewTrnx(context),
-        //       icon: Icon(Icons.add_circle_outline)),
-        // ],
+    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final appBar = AppBar(
+      title: Text(
+        'Personal Expense Tracker',
+        style: TextStyle(
+            fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
       ),
+    );
+    final txListWidget = Container(
+        height: (MediaQuery.of(context).size.height -
+            appBar.preferredSize.height -
+            MediaQuery.of(context).padding.top) *
+            0.72,
+        child: TrnxList(_userTransactions, _deleteTrnx));
+    return Scaffold(
+      appBar: appBar,
       body: SingleChildScrollView(
           child: Column(
         //body part
         //mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
-          chart(_recentTrnx),
-          Container(child: TrnxList(_userTransactions,_deleteTrnx))
+          if (isLandscape) Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+            Text('Show Chart'),
+            Switch(value: _showChart, onChanged: (val){
+              setState(() {
+                _showChart=val;
+              });
+            } ),
+          ],
+          ),
+           if (!isLandscape) Container(
+               height: (MediaQuery.of(context).size.height -
+                   appBar.preferredSize.height -
+                   MediaQuery.of(context).padding.top) *
+                   0.28,
+               child: chart(_recentTrnx)),
+           if (!isLandscape) txListWidget,
+          if (isLandscape) _showChart ? Container(
+              height: (MediaQuery.of(context).size.height -
+                      appBar.preferredSize.height -
+                      MediaQuery.of(context).padding.top) *
+                  0.75,
+              child: chart(_recentTrnx))
+          : txListWidget
         ],
       )),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

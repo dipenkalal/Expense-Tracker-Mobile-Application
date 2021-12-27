@@ -52,59 +52,60 @@ class _newTrnxState extends State<newTrnx> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Container(
-        //height: 250 ,
-        padding: EdgeInsets.all(10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 10),
-            TextField(
-              //autofocus: true,
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Title'),
-              controller: _TitleController,
-              onSubmitted: (_) => _submitData,
-            ),
-            SizedBox(height: 10),
-            TextField(
-              decoration: InputDecoration(
-                  border: OutlineInputBorder(), labelText: 'Amount'),
-              controller: _AmountController,
-              keyboardType: TextInputType.number,
-              onSubmitted: (_) => _submitData,
-            ),
-            SizedBox(height: 10),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: <Widget>[
-                Text(_selectedDate == null ? 'No Date Chosen' : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',),
-                CupertinoButton(
-                  onPressed: _presentDatePicker,
-                  child: Text(
-                    'Choose a Date',
-                    style: TextStyle(fontWeight: FontWeight.bold),
+    return SingleChildScrollView(
+      child: Card(
+        child: Container(
+          padding: EdgeInsets.only(top: 10,left: 10, right: 10, bottom: MediaQuery.of(context).viewInsets.bottom + 10,),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              SizedBox(height: 10),
+              TextField(
+                //autofocus: true,
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Title'),
+                controller: _TitleController,
+                onSubmitted: (_) => _submitData,
+              ),
+              SizedBox(height: 10),
+              TextField(
+                decoration: InputDecoration(
+                    border: OutlineInputBorder(), labelText: 'Amount'),
+                controller: _AmountController,
+                keyboardType: TextInputType.number,
+                onSubmitted: (_) => _submitData,
+              ),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget>[
+                  Text(_selectedDate == null ? 'No Date Chosen' : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',),
+                  CupertinoButton(
+                    onPressed: _presentDatePicker,
+                    child: Text(
+                      'Choose a Date',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(height: 20),
-            CupertinoButton.filled(
-              onPressed: _submitData,
-              child: Text('Add Your Transaction'),
-              // style: ElevatedButton.styleFrom(
-              //     primary: Colors.redAccent,
-              //     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-              //     textStyle:
-              //     const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
-              // style: ButtonStyle(
-              //   backgroundColor:
-              //   MaterialStateProperty.all<Color>(Colors.redAccent),
-              // ),
-            ),
-            SizedBox(height: 10),
-          ],
+                ],
+              ),
+              SizedBox(height: 20),
+              CupertinoButton.filled(
+                onPressed: _submitData,
+                child: Text('Add Your Transaction'),
+                // style: ElevatedButton.styleFrom(
+                //     primary: Colors.redAccent,
+                //     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+                //     textStyle:
+                //     const TextStyle(fontSize: 16, fontWeight: FontWeight.normal)),
+                // style: ButtonStyle(
+                //   backgroundColor:
+                //   MaterialStateProperty.all<Color>(Colors.redAccent),
+                // ),
+              ),
+              SizedBox(height: 10),
+            ],
+          ),
         ),
       ),
     );

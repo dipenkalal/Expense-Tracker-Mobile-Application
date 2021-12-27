@@ -16,31 +16,32 @@ class TrnxList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    return Container(
-      height: 500,
-      child: transactions.isEmpty
-          ? Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
+    return transactions.isEmpty
+          ? LayoutBuilder(builder: (ctx, constraints){
+      return Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
 
-                SizedBox(height: 20),
-                Container(
-                    height: 200,
-                    child: Image.asset(
-                      'assets/images/waiting-icon.png',
-                      fit: BoxFit.contain,
-                    )),
-                SizedBox(height: 20),
-                Text(
-                  'No Transactions to show 😃',
-                  style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'Montserrat-Black',
-                      fontWeight: FontWeight.bold),
-                ),
-              ],
-            )
+          SizedBox(height: 20),
+          Container(
+              height: constraints.maxHeight * 0.4,
+              child: Image.asset(
+                'assets/images/waiting-icon.png',
+                fit: BoxFit.contain,
+              )),
+          SizedBox(height: 20),
+          Text(
+            'No Transactions to show 😃',
+            style: TextStyle(
+                fontSize: 24,
+                fontFamily: 'Montserrat-Black',
+                fontWeight: FontWeight.bold),
+          ),
+        ],
+      );
+    })
+
           : ListView.builder(
                   shrinkWrap: true,
               itemBuilder: (ctx, index) {
@@ -72,7 +73,6 @@ class TrnxList extends StatelessWidget {
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               // crossAxisAlignment: CrossAxisAlignment.stretch,
               itemCount: transactions.length,
-            ),
     );
   }
 }

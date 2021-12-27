@@ -35,27 +35,27 @@ class chart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 6,
-      margin: EdgeInsets.all(20),
-      child: Padding(
-        padding: EdgeInsets.all(10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: groupedTrnxValues.map((data) {
-            // return chartBar(data['day'],data['amount'],data['amount']/totalSum);
-            return Flexible(
-              fit: FlexFit.tight,
-              child: chartBar(
-                data['day'],
-                data['amount'],
-                maxSpendings == 0
-                    ? 0
-                    : (data['amount'] as double) / maxSpendings,
-              ),
-            );
-          }).toList(),
+        elevation: 6,
+        margin: EdgeInsets.all(20),
+        child: Padding(
+          padding: EdgeInsets.all(10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: groupedTrnxValues.map((data) {
+              // return chartBar(data['day'],data['amount'],data['amount']/totalSum);
+              return Flexible(
+                fit: FlexFit.tight,
+                child: chartBar(
+                  data['day'],
+                  data['amount'],
+                  maxSpendings == 0
+                      ? 0
+                      : (data['amount'] as double) / maxSpendings,
+                ),
+              );
+            }).toList(),
+          ),
         ),
-      ),
     );
   }
 }
