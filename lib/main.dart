@@ -113,7 +113,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final isLandscape = MediaQuery.of(context).orientation == Orientation.landscape;
+    final mQuery = MediaQuery.of(context);
+    final isLandscape = mQuery.orientation == Orientation.landscape;
     final appBar = AppBar(
       title: Text(
         'Personal Expense Tracker',
@@ -122,10 +123,10 @@ class _HomePageState extends State<HomePage> {
       ),
     );
     final txListWidget = Container(
-        height: (MediaQuery.of(context).size.height -
+        height: (mQuery.size.height -
             appBar.preferredSize.height -
-            MediaQuery.of(context).padding.top) *
-            0.72,
+            mQuery.padding.top) *
+            0.7,
         child: TrnxList(_userTransactions, _deleteTrnx));
     return Scaffold(
       appBar: appBar,
@@ -147,16 +148,16 @@ class _HomePageState extends State<HomePage> {
           ],
           ),
            if (!isLandscape) Container(
-               height: (MediaQuery.of(context).size.height -
+               height: (mQuery.size.height -
                    appBar.preferredSize.height -
-                   MediaQuery.of(context).padding.top) *
+                   mQuery.padding.top) *
                    0.28,
                child: chart(_recentTrnx)),
            if (!isLandscape) txListWidget,
           if (isLandscape) _showChart ? Container(
-              height: (MediaQuery.of(context).size.height -
+              height: (mQuery.size.height -
                       appBar.preferredSize.height -
-                      MediaQuery.of(context).padding.top) *
+                  mQuery.padding.top) *
                   0.75,
               child: chart(_recentTrnx))
           : txListWidget
@@ -167,7 +168,7 @@ class _HomePageState extends State<HomePage> {
         onPressed: () => _startAddNewTrnx(context),
         icon: Icon(Icons.add),
         foregroundColor: Colors.white,
-        label: const Text('Add Transaction'),
+        label: const Text('ADD'),
         backgroundColor: Colors.deepPurple,
       ),
     );
