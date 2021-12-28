@@ -1,10 +1,11 @@
+import 'dart:io';
 import 'package:exptracker/widgets/new_transaction.dart';
 import 'package:exptracker/widgets/transaction_list.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './models/transaction.dart';
-import 'dart:ui' as ui;
+
 import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
@@ -14,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primarySwatch: Colors.deepPurple,
         fontFamily: 'Montserrat',
       ),
       title: 'Second Application',
@@ -25,53 +26,68 @@ class MyApp extends StatelessWidget {
 
 class HomePage extends StatefulWidget {
   @override
-  State<HomePage> createState() => _HomePageState();
+  _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  // String titleInput="Enter Transaction";
+
   final List<Transaction> _userTransactions = [
-    // Transaction(
-    //   id: '1',
-    //   title: 'Title 1',
-    //   amount: 100,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '2',
-    //   title: 'Title 2',
-    //   amount: 1999,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '3',
-    //   title: 'Title 3',
-    //   amount: 2999,
-    //   date: DateTime.now(),
-    // ),
-    // Transaction(
-    //   id: '4',
-    //   title: 'Title 4',
-    //   amount: 3999,
-    //   date: DateTime.now(),
-    // ),
+    Transaction(
+      id: '1',
+      title: 'Vegetables ',
+      amount: 150,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '2',
+      title: 'Transportation ',
+      amount: 245,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '3',
+      title: 'Utility Bills ',
+      amount: 5750,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '4',
+      title: 'Monthly Memberships ',
+      amount: 159,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '5',
+      title: 'Vegetables ',
+      amount: 150,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: '6',
+      title: 'Transportation ',
+      amount: 245,
+      date: DateTime.now(),
+    ),
   ];
 
-  List<Transaction> get _recentTrnx{
+  bool _showChart = false;
 
-    return _userTransactions.where((tx){
-
-      return tx.date.isAfter(DateTime.now().subtract(Duration(days: 7),),);
+  List<Transaction> get _recentTrnx {
+    return _userTransactions.where((tx) {
+      return tx.date.isAfter(
+        DateTime.now().subtract(
+          Duration(days: 7),
+        ),
+      );
     }).toList();
-
   }
 
-  void _addNewTrnx(String title, double amount) {
+  void _addNewTrnx(String title, double amount, DateTime ChosenDate) {
     final newTrnxs = Transaction(
         id: DateTime.now().toString(),
         title: title,
         amount: amount,
-        date: DateTime.now());
+        date: ChosenDate);
 
     setState(() {
       _userTransactions.add(newTrnxs);
@@ -87,42 +103,80 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  void _deleteTrnx(String id) {
+    setState(() {
+      _userTransactions.removeWhere((tx) {
+        return tx.id == id;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final ui.Size logicalSize = MediaQuery.of(context).size;
-    final double _height = logicalSize.height;
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: Text(
-          'Debugging version 0.3.1',
-          style: TextStyle(
-              fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
-        ),
-        actions: <Widget>[
-          IconButton(
-              onPressed: () => _startAddNewTrnx(context),
-              icon: Icon(Icons.add_circle_outline)),
-        ],
+    final mQuery = MediaQuery.of(context);
+    final isLandscape = mQuery.orientation == Orientation.landscape;
+    final appBar = AppBar(
+      title: Text(
+        'Personal Expense Tracker',
+        style: TextStyle(
+            fontFamily: 'Montserrat-Black', fontWeight: FontWeight.bold),
       ),
-      body: SingleChildScrollView(
-          child: Column(
-        //body part
-        //mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          chart(_recentTrnx),
-
-
-          TrnxList(_userTransactions)
-        ],
-      )),
+      actions: <Widget>[
+        //ElevatedButton.icon(onPressed: () =>  _startAddNewTrnx(context), icon: Icon(Icons.add_circle_outline), label: Text('ADD'))
+            ],
+    );
+    final txListWidget = Container(
+        height: (mQuery.size.height -
+            appBar.preferredSize.height -
+            mQuery.padding.top) *
+            0.7,
+        child: TrnxList(_userTransactions, _deleteTrnx));
+    final pageBody = SafeArea(child: SingleChildScrollView(
+        child: Column(
+          //body part
+          //mainAxisAlignment: MainAxisAlignment.spaceAround,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            if (isLandscape) Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: <Widget>[
+                Text('Show Chart'),
+                Switch.adaptive(value: _showChart, onChanged: (val){
+                  setState(() {
+                    _showChart=val;
+                  });
+                } ),
+              ],
+            ),
+            if (!isLandscape) Container(
+                height: (mQuery.size.height -
+                    appBar.preferredSize.height -
+                    mQuery.padding.top) *
+                    0.28,
+                child: chart(_recentTrnx)),
+            if (!isLandscape) txListWidget,
+            if (isLandscape) _showChart ? Container(
+                height: (mQuery.size.height -
+                    appBar.preferredSize.height -
+                    mQuery.padding.top) *
+                    0.75,
+                child: chart(_recentTrnx))
+                : txListWidget
+          ],
+        )),
+    );
+    
+    
+    return Platform.isIOS? CupertinoPageScaffold(child: pageBody ,) : Scaffold(
+      appBar: appBar,
+      body: pageBody,
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: Platform.isIOS ? Container() : FloatingActionButton.extended(
         onPressed: () => _startAddNewTrnx(context),
         icon: Icon(Icons.add),
-        label: const Text('Add Transaction'),
-        backgroundColor: Colors.redAccent,
+        foregroundColor: Colors.white,
+        label: const Text('ADD'),
+        backgroundColor: Colors.deepPurple,
       ),
     );
   }
