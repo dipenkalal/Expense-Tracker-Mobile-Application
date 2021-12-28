@@ -17,7 +17,10 @@ class _newTrnxState extends State<newTrnx> {
   DateTime _selectedDate = DateTime.now();
 
 
+
   void _submitData() {
+
+    //previous stable
     final enteredTitle = _TitleController.text;
     final enteredAmount = double.parse(_AmountController.text);
 

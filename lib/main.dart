@@ -5,7 +5,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import './models/transaction.dart';
-
 import './widgets/chart.dart';
 
 void main() => runApp(MyApp());
@@ -28,6 +27,7 @@ class HomePage extends StatefulWidget {
   @override
   _HomePageState createState() => _HomePageState();
 }
+
 
 class _HomePageState extends State<HomePage> {
 
@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
       date: DateTime.now(),
     ),
   ];
+
 
   bool _showChart = false;
 
