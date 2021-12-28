@@ -18,15 +18,9 @@ class _NewTrnxState extends State<NewTrnx> {
 
 
   void _submitData() {
-<<<<<<< Updated upstream
-    final enteredTitle = _TitleController.text;
-    final enteredAmount = double.parse(_AmountController.text);
-=======
-
-    //previous stable
     final enteredTitle = _titleController.text;
     final enteredAmount = double.parse(_amountController.text);
->>>>>>> Stashed changes
+
 
     if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;

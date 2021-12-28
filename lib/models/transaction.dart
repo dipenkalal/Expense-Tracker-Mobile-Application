@@ -1,5 +1,3 @@
-import 'package:flutter/foundation.dart';
-
 class Transaction{
   final String id;
   final String title;
@@ -13,11 +11,5 @@ class Transaction{
     required this.amount,
     required this.date,
 }
-<<<<<<< Updated upstream
       );
 }
-=======
-
-
-
->>>>>>> Stashed changes
