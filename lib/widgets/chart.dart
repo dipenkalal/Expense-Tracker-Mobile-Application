@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import './chart_bar.dart';
 
-class chart extends StatelessWidget {
+class Chart extends StatelessWidget {
   final List<Transaction> recentTrnx;
-  chart(this.recentTrnx);
+  const Chart(this.recentTrnx,{Key? key}) : super(key: key);
 
   List<Map<String, dynamic>> get groupedTrnxValues {
     return List.generate(7, (index) {
@@ -36,16 +36,15 @@ class chart extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
         elevation: 6,
-        margin: EdgeInsets.all(20),
+        margin: const EdgeInsets.all(20),
         child: Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: groupedTrnxValues.map((data) {
-              // return chartBar(data['day'],data['amount'],data['amount']/totalSum);
               return Flexible(
                 fit: FlexFit.tight,
-                child: chartBar(
+                child: ChartBar(
                   data['day'],
                   data['amount'],
                   maxSpendings == 0

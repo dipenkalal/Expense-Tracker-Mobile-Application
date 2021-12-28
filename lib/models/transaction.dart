@@ -13,5 +13,11 @@ class Transaction{
     required this.amount,
     required this.date,
 }
+<<<<<<< Updated upstream
       );
 }
+=======
+
+
+
+>>>>>>> Stashed changes

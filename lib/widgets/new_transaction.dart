@@ -2,26 +2,33 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class newTrnx extends StatefulWidget {
+class NewTrnx extends StatefulWidget {
   final Function addtrnx;
 
-  newTrnx(this.addtrnx);
+  const NewTrnx(this.addtrnx,{Key? key}) : super(key: key);
 
   @override
-  _newTrnxState createState() => _newTrnxState();
+  _NewTrnxState createState() => _NewTrnxState();
 }
 
-class _newTrnxState extends State<newTrnx> {
-  final _TitleController = TextEditingController();
-  final _AmountController = TextEditingController();
+class _NewTrnxState extends State<NewTrnx> {
+  final _titleController = TextEditingController();
+  final _amountController = TextEditingController();
   DateTime _selectedDate = DateTime.now();
 
 
   void _submitData() {
+<<<<<<< Updated upstream
     final enteredTitle = _TitleController.text;
     final enteredAmount = double.parse(_AmountController.text);
+=======
 
-    if (enteredTitle.isEmpty || enteredAmount <= 0 || _selectedDate == null) {
+    //previous stable
+    final enteredTitle = _titleController.text;
+    final enteredAmount = double.parse(_amountController.text);
+>>>>>>> Stashed changes
+
+    if (enteredTitle.isEmpty || enteredAmount <= 0) {
       return;
     }
     widget.addtrnx(
@@ -47,7 +54,6 @@ class _newTrnxState extends State<newTrnx> {
       });
 
     } );
-    print('...');
   }
 
   @override
@@ -59,40 +65,40 @@ class _newTrnxState extends State<newTrnx> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
                 //autofocus: true,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Title'),
-                controller: _TitleController,
+                controller: _titleController,
                 onSubmitted: (_) => _submitData,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                     border: OutlineInputBorder(), labelText: 'Amount'),
-                controller: _AmountController,
+                controller: _amountController,
                 keyboardType: TextInputType.number,
                 onSubmitted: (_) => _submitData,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Text(_selectedDate == null ? 'No Date Chosen' : 'Picked Date: ${DateFormat.yMd().format(_selectedDate)}',),
+                  Text('Picked Date: ${DateFormat.yMd().format(_selectedDate)}',),
                   CupertinoButton(
                     onPressed: _presentDatePicker,
-                    child: Text(
+                    child: const Text(
                       'Choose a Date',
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
                 ],
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               CupertinoButton.filled(
                 onPressed: _submitData,
-                child: Text('Add Your Transaction'),
+                child: const Text('Add Your Transaction'),
                 // style: ElevatedButton.styleFrom(
                 //     primary: Colors.redAccent,
                 //     padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
@@ -103,7 +109,7 @@ class _newTrnxState extends State<newTrnx> {
                 //   MaterialStateProperty.all<Color>(Colors.redAccent),
                 // ),
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
             ],
           ),
         ),
